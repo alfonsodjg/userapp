@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">UsersApp</string>
+    <string name="title">title</string>
+    <string name="message_empty">No hay registro de usuarios</string>
+    <string name="network_offline">Sin conexion a internet</string>
+    <string name="network_online">Conectado a internet</string>
+</resources>
