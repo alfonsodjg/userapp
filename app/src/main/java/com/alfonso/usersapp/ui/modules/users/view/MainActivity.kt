@@ -66,10 +66,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             binding.progress.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        }
 
-        viewModel.networkStatus.observe(this) { status ->
-            when (status) {
+            when (state.networkStatus) {
                 NetworkStatus.Available -> showConnectionBanner(true)
                 NetworkStatus.Lost,
                 NetworkStatus.Unavailable -> showConnectionBanner(false)

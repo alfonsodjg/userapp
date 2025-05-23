@@ -35,13 +35,10 @@ class UsersViewModel @Inject constructor(
     private val _viewState = MutableLiveData(UsersViewState())
     val viewState: LiveData<UsersViewState> = _viewState
 
-    private val _networkStatus = MutableLiveData<NetworkStatus>()
-    val networkStatus: LiveData<NetworkStatus> = _networkStatus
-
 
     init {
         connectivityObserver.observe().onEach { status ->
-            _networkStatus.value = status
+            _viewState.value = _viewState.value?.copy(networkStatus = status)
             when (status) {
                 NetworkStatus.Available -> onGetUsers(true)
                 NetworkStatus.Lost, NetworkStatus.Unavailable -> onGetUsers(false)
