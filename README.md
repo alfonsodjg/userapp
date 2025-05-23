@@ -88,7 +88,8 @@ Contiene `AppModule`, el objeto responsable de proveer Retrofit, Room, DAO y rep
 
 ### test – Pruebas unitarias
 Incluye tests unitarios para los casos de uso y lógica de dominio, asegurando el correcto funcionamiento de la lógica de negocio y validación de estados.
-> Estas pruebas se encuentran en el paquete [`domain.modules.users.usecase`](https://github.com/usuario/repositorio/blob/main/app/src/test/java/com/alfonso/usersapp/domain/modules/users/usecase)
+> Estas pruebas se encuentran en el paquete [`domain.modules.users.usecase`](https://github.com/alfonsodjg/userapp/tree/main/app/src/test/java/com/alfonso/usersapp/domain/modules/users/usecase)
+
 
 ----------------------------------------------------------------------------------------------------------
 
