@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -12,13 +13,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alfonso.usersapp.R
 import com.alfonso.usersapp.databinding.ActivityMainBinding
 import com.alfonso.usersapp.domain.conection.NetworkStatus
 import com.alfonso.usersapp.ui.modules.users.adapter.UsersAdapter
-import com.alfonso.usersapp.ui.modules.users.swipe.SwipeToDeleteCallback
 import com.alfonso.usersapp.ui.modules.users.viewmodel.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -45,15 +44,11 @@ class MainActivity : AppCompatActivity() {
         val isConnected = isNetworkAvailable()
         viewModel.onGetUsers(isConnected)
         showConnectionBanner(isConnected)
-
-        val swipeCallback = SwipeToDeleteCallback(this) { position ->
-            val user = adapter.getUser(position)
-            viewModel.onDeleteUser(user)
-            adapter.removeUser(position)
-        }
-        ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.rvUsers)
+        adapter.updateConnectionStatus(isConnected)
 
         viewModel.viewState.observe(this) { state ->
+            adapter.updateConnectionStatus(state.networkStatus == NetworkStatus.Available)
+
             if (state.response.isEmpty()) {
                 binding.rvUsers.visibility = View.GONE
                 binding.progress.visibility = View.GONE
@@ -80,9 +75,13 @@ class MainActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         adapter = UsersAdapter(
             onCheckedChange = { user, isChecked ->
-            val updatedUser = user.copy(completed = isChecked)
-            viewModel.onUpdateUser(updatedUser)
-         }
+                val updatedUser = user.copy(completed = isChecked)
+                viewModel.onUpdateUser(updatedUser)
+            },
+            onDeleteClick = { user ->
+                Toast.makeText(binding.root.context, "Borrado con éxito", Toast.LENGTH_SHORT).show()
+                viewModel.onDeleteUser(user)
+            }
         )
         binding.rvUsers.layoutManager = LinearLayoutManager(this)
         binding.rvUsers.adapter = adapter

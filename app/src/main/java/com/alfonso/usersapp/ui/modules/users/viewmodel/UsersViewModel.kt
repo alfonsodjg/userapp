@@ -35,10 +35,15 @@ class UsersViewModel @Inject constructor(
     private val _viewState = MutableLiveData(UsersViewState())
     val viewState: LiveData<UsersViewState> = _viewState
 
+    private var lastNetworkStatus: NetworkStatus? = null
+
 
     init {
         connectivityObserver.observe().onEach { status ->
-            _viewState.value = _viewState.value?.copy(networkStatus = status)
+            if (status != lastNetworkStatus) {
+                lastNetworkStatus = status
+                _viewState.value = _viewState.value?.copy(networkStatus = status)
+            }
             when (status) {
                 NetworkStatus.Available -> onGetUsers(true)
                 NetworkStatus.Lost, NetworkStatus.Unavailable -> onGetUsers(false)
@@ -107,6 +112,8 @@ class UsersViewModel @Inject constructor(
     fun onDeleteUser(user: UsersUIModel){
         viewModelScope.launch {
             deleteUserUseCase(user.toDomain())
+            val localUsers = getLocalUsersUseCase().map { it.toUI() }
+            _viewState.value = _viewState.value?.copy(response = localUsers)
         }
     }
 }

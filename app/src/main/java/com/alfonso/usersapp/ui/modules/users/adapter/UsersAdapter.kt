@@ -8,10 +8,18 @@ import com.alfonso.usersapp.databinding.ItemUserBinding
 import com.alfonso.usersapp.ui.modules.users.model.UsersUIModel
 
 class UsersAdapter(
-    private val onCheckedChange: (UsersUIModel, Boolean) -> Unit
+    private val onCheckedChange: (UsersUIModel, Boolean) -> Unit,
+    private val onDeleteClick: (UsersUIModel) -> Unit
 ): RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
 
     private val users = mutableListOf<UsersUIModel>()
+    private var isConnected: Boolean = true
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateConnectionStatus(connected: Boolean) {
+        isConnected = connected
+        notifyDataSetChanged()
+    }
 
     inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -22,6 +30,13 @@ class UsersAdapter(
 
             binding.cbCompleted.setOnCheckedChangeListener { _, isChecked ->
                 onCheckedChange(user, isChecked)
+            }
+            binding.cbCompleted.isEnabled = !isConnected
+            binding.cbCompleted.alpha = if (isConnected) 0.3f else 1f
+            binding.btnDelete.isEnabled = !isConnected
+            binding.btnDelete.alpha = if (isConnected) 0.3f else 1f
+            binding.btnDelete.setOnClickListener {
+                onDeleteClick(user)
             }
         }
     }
