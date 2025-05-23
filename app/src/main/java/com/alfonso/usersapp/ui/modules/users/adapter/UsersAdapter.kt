@@ -61,11 +61,4 @@ class UsersAdapter(
         users.addAll(newUsers)
         notifyDataSetChanged()
     }
-
-    fun getUser(position: Int): UsersUIModel = users[position]
-
-    fun removeUser(position: Int) {
-        users.removeAt(position)
-        notifyItemRemoved(position)
-    }
 }
