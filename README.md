@@ -7,7 +7,7 @@ Aplicación Android para gestionar usuarios, con almacenamiento local y 	sincron
 ## Características
 
 - Muestra una lista de usuarios desde caché y red.
-- Funcion de actualizar usuarios al marcar checkbox, (aplica en caché).
+- Funcion de actualizar usuarios al marcar checkbox,(aplica en caché).
 - Funcion de eliminar usuarios deslizando cada item hacia la izquierda(aplica en caché).
 - Implementación con MVVM, Retrofit/Ktor, Room, Hilt.
 - Compatibilidad con Android 23+.
@@ -88,7 +88,7 @@ Contiene `AppModule`, el objeto responsable de proveer Retrofit, Room, DAO y rep
 
 ### test – Pruebas unitarias
 Incluye tests unitarios para los casos de uso y lógica de dominio, asegurando el correcto funcionamiento de la lógica de negocio y validación de estados.
-> Estas pruebas se encuentran en `app/kotlin+java/com.alfonso.usersapp(test)/domain.modules.users.usecase
+> Estas pruebas se encuentran en el paquete `app/kotlin+java/com.alfonso.usersapp(test)/domain.modules.users.usecase
 
 ----------------------------------------------------------------------------------------------------------
 
