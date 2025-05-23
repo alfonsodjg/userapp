@@ -88,7 +88,7 @@ Contiene `AppModule`, el objeto responsable de proveer Retrofit, Room, DAO y rep
 
 ### test – Pruebas unitarias
 Incluye tests unitarios para los casos de uso y lógica de dominio, asegurando el correcto funcionamiento de la lógica de negocio y validación de estados.
-> Estas pruebas se encuentran en el paquete `app/kotlin+java/com.alfonso.usersapp(test)/domain.modules.users.usecase
+> Estas pruebas se encuentran en el paquete [`domain.modules.users.usecase`](https://github.com/usuario/repositorio/blob/main/app/src/test/java/com/alfonso/usersapp/domain/modules/users/usecase)
 
 ----------------------------------------------------------------------------------------------------------
 
@@ -111,7 +111,7 @@ Incluye tests unitarios para los casos de uso y lógica de dominio, asegurando e
     - **Conectividad de red**:
         Fue un reto porque no lo había implementado antes, pero lo resolví con la clase `NetworkConnectivity` usando la interfaz `ConnectivityObserver`.
     - **Compatibilidad de Room con KSP**:
-       Tuve advertencias de Gradle al usar Room con `kapt`; consulté la documentación oficial y migré a `ksp`, actualizando la versión de Room.
+       Tuve advertencias de Gradle al usar Room con `kapt`; consulté la documentación oficial y migré a `ksp`, actualizando la versión de Room y agregando los plugins de KSP.
 
 ### ¿Qué decisiones tomaste respecto a la organización del código y por qué?
     -**Decidí estructurar el proyecto por capas siguiendo Clean Architecture + MVVM para evitar acoplamientos innecesarios y mantener un código escalable. 
