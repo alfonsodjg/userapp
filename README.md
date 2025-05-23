@@ -8,7 +8,7 @@ Aplicación Android para gestionar usuarios, con almacenamiento local y 	sincron
 
 - Muestra una lista de usuarios desde caché y red.
 - Funcion de actualizar usuarios al marcar checkbox,(aplica en caché).
-- Funcion de eliminar usuarios deslizando cada item hacia la izquierda(aplica en caché).
+- Funcion de eliminar usuarios (aplica en caché).
 - Implementación con MVVM, Retrofit/Ktor, Room, Hilt.
 - Compatibilidad con Android 23+.
 
@@ -76,7 +76,6 @@ Gestiona la interacción con el usuario y conecta con la lógica del ViewModel.
     - `adapter/` – Adaptador para el RecyclerView de la lista de usuarios
     - `mapper/` – Transforma datos de dominio a modelos de presentación o UI
     - `model/` – Modelo usado exclusivamente en la capa de UI
-    - `swipe/` – Componente que permite deslizar ítems en la lista
     - `view/` – Activity principal y layout de la aplicación
     - `viewmodel/` – ViewModel que expone datos y estados a la vista
     - `viewstate/` – Define los distintos estados visuales de la pantalla
@@ -126,6 +125,8 @@ Incluye tests unitarios para los casos de uso y lógica de dominio, asegurando e
     - En proyectos que utilizan unicamente XML, adoptaría una estrategia híbrida que combine XML y Jetpack Compose para facilitar una migración progresiva.
     - Implementaría **paginación** para mejorar el rendimiento con listas grandes.
     - Mejoraría el soporte offline.
+    - Agregaría mejor diseño visual para mejorar la experiencia de usuario.
+    - Implementaría funcionalidad de **swipe**(Deslizar hacia la izquierda) para borrar ítems en el RecyclerView de forma intuitiva y rápida.
 
 
 ## Contacto
